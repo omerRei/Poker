@@ -158,7 +158,7 @@ class Game:
 
 def play_game():
     env = PokerEnv()
-    agent_model = keras.models.load_model('model.h5')
+    agent_model = keras.models.load_model('static/model.h5')
     cards_dictionary = create_cards_dictionary()
 
     done = False
