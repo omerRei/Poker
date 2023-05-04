@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Poker Game</title>
+</head>
+<body>
+	<div style="display:flex; flex-direction:row;">
+		<div style="margin-right:20px;">
+			<h2>opponent Stack:</h2>
+			<p>{{ opponent_stack }}</p>
+		</div>
+		<form action="" method="post">
+				{% csrf_token %}
+				{% if player_turn %}
+					<button style="margin-top:50px; margin-right:20px " disabled type="submit" name="action" value="nip">Agent Action</button>
+				{% else %}
+					<button style="margin-top:50px; margin-right:20px " type="submit" name="action" value="nip">Agent Action</button>
+				{% endif %}
+		</form>
+		<div style="margin-right:20px;">
+			<h2>opponent Cards:</h2>
+			<p>{{ opponent_cards }}</p>
+		</div>
+		<div>
+			<h2>Position:</h2>
+			<p>{{ opponent_position }}</p>
+		</div>
+	</div>
+	<div style="display:flex; flex-direction:row;">
+		<div style="margin-right:20px;">
+			<h2>Pot Size:</h2>
+			<p>{{ pot_size }}</p>
+		</div>
+		<div>
+			<h2>Community Cards:</h2>
+			<p>{{ community_cards }}</p>
+		</div>
+	</div>
+	<div style="display:flex; flex-direction:row;">
+		<div style="margin-right:20px;">
+			<h2>Player Cards:</h2>
+			<p>{{ player_cards }}</p>
+		</div>
+		<div>
+			<h2>Actions:</h2>
+			<form action="" method="post">
+				{% csrf_token %}
+				{% csrf_token %}
+				{% if player_turn %}
+					<button type="submit" name="action" value="Fold">Fold</button>
+					<button type="submit" name="action" value="Check">Check</button>
+					<button type="submit" name="action" value="Call">Call</button>
+					<button type="submit" name="action" value="Min_Raise">Min Raise</button>
+					<button type="submit" name="action" value="Big_Raise">Big Raise</button>
+				{% else %}
+					<button disabled type="submit" name="action" value="Fold">Fold</button>
+					<button disabled type="submit" name="action" value="Check">Check</button>
+					<button disabled type="submit" name="action" value="Call">Call</button>
+					<button disabled type="submit" name="action" value="Min_Raise">Min Raise</button>
+					<button disabled type="submit" name="action" value="Big_Raise">Big Raise</button>
+				{% endif %}
+			</form>
+		</div>
+		<div>
+			<h2>Position:</h2>
+			<p>{{ player_position }}</p>
+		</div>
+	</div>
+	<div>
+		<p>
+			xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+		</p>
+		<p>
+			{{ winner }}
+		</p>
+	</div>
+</body>
+</html>
