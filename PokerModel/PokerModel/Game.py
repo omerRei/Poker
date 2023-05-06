@@ -87,19 +87,19 @@ def create_cards_dictionary():
 class Game:
 
 
-    def __new__(cls, *args, **kwargs):
-        if not hasattr(cls, 'instance'):
-            cls.instace = super(Game, cls).__new__(cls)
-        return cls.instace
+    # def __new__(cls, *args, **kwargs):
+    #     if not hasattr(cls, 'instance'):
+    #         cls.instace = super(Game, cls).__new__(cls)
+    #     return cls.instace
 
-    # def __init__(self):
-    #     self.env = None
-    #     self.agent_model = None
-    #     self.cards_dictionary = None
-    #     self.done = None
-    #     self.agent_action = None
-    #     self.player_action = None
-    #     self.winner = None
+    def __init__(self):
+        self.env = None
+        self.agent_model = None
+        self.cards_dictionary = None
+        self.done = None
+        self.agent_action = None
+        self.player_action = None
+        self.winner = None
 
 
     def reset(self):

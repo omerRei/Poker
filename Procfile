@@ -1,1 +1,1 @@
-web gunicorn WebPokerGame.wsgi:application --log-file -
+web gunicorn WebPokerGame.wsgi:application --log-file --workers 1 -

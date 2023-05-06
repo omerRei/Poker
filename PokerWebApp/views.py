@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from PokerModel.PokerModel.Game import Game
-from django.conf import settings
+
 # # Create your views here.
+
 game = Game()
 
 def index(request):
@@ -30,7 +31,4 @@ def player_action(request):
             game.step(4)
         else:
             game.step(0)
-    # if game.done:
-    #     return render(request, 'PokerWebApp/winnerPage.html', {"winner": game.get_absolute_winner()})
-    # return game.create_context()
 
