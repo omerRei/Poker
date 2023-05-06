@@ -2,7 +2,7 @@ from django.shortcuts import render
 from PokerModel.PokerModel.Game import Game
 from django.conf import settings
 # # Create your views here.
-from WebPokerGame.settings import game
+game = Game()
 
 def index(request):
     if request.method == 'GET':
