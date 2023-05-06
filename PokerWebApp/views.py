@@ -1,8 +1,10 @@
 from django.shortcuts import render
 from PokerModel.PokerModel.Game import Game
+from config import game
 
-# Create your views here.
-game = Game()
+# # Create your views here.
+# game = Game()
+
 
 def index(request):
     if request.method == 'GET':
