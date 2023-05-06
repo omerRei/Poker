@@ -98,7 +98,7 @@ class Game:
 
     def reset(self):
         self.env = PokerEnv()
-        self.agent_model = keras.models.load_model('C:/Users/Omer/WebPokerGame/PokerModel/PokerModel/model.h5')
+        self.agent_model = keras.models.load_model('static/model.h5')
         self.cards_dictionary = create_cards_dictionary()
         self.done = False
         self.agent_action = ""

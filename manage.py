@@ -19,4 +19,7 @@ def main():
 
 
 if __name__ == "__main__":
+    from os.path import exists
+
     main()
+
