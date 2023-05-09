@@ -18,8 +18,28 @@
 				{% endif %}
 		</form>
 		<div style="margin-right:20px;">
-			<h2>opponent Cards:</h2>
-			<p>{{ opponent_cards }}</p>
+			<div>
+				<h2>opponent Cards:</h2>
+			</div>
+			<div style="display:flex; flex-direction:row;">
+				<div>
+					{% if show_opponent_cards %}
+						<p>{{ opponent_cards }}</p>
+					{% else %}
+						<p>X , X</p>
+					{% endif %}
+				</div>
+				<div>
+					<form action="" method="post">
+						{% csrf_token %}
+						{% if show_opponent_cards %}
+							<button style="margin-top:20px; margin-left:20px; " type="submit" name="action" value="show_cards">Hide</button>
+						{% else %}
+							<button style="margin-top:20px; margin-left:20px; " type="submit" name="action" value="show_cards">Show</button>
+						{% endif %}
+					</form>
+				</div>
+			</div>
 		</div>
 		<div>
 			<h2>Position:</h2>

@@ -100,6 +100,7 @@ class Game:
         self.agent_action = None
         self.player_action = None
         self.winner = None
+        self.show_opponent_cards = None
 
 
     def reset(self):
@@ -110,7 +111,14 @@ class Game:
         self.agent_action = ""
         self.player_action = ""
         self.winner = ""
+        self.show_opponent_cards = False
         return self.create_context()
+
+    def flip_show_cards(self):
+        if self.show_opponent_cards:
+            self.show_opponent_cards = False
+        else:
+            self.show_opponent_cards = True
 
 
     # def step(self, player_action):
@@ -151,7 +159,8 @@ class Game:
             "done": self.done,
             "pot_size": self.env.pot,
             "player_turn": self.is_player_turn(),
-            "winner": self.winner
+            "winner": self.winner,
+            "show_opponent_cards": self.show_opponent_cards
         }
         return context
 

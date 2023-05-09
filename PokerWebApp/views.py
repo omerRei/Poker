@@ -19,7 +19,9 @@ def index(request):
 
 def player_action(request):
     if request.method == 'POST':
-        if 'Fold' == request.POST['action']:
+        if 'show_cards' == request.POST['action']:
+            game.flip_show_cards()
+        elif 'Fold' == request.POST['action']:
             game.step(0)
         elif 'Check' == request.POST['action']:
             game.step(1)
