@@ -95,7 +95,8 @@ class Game:
     def __init__(self):
         self.env = None
         self.agent_model = None
-        self.cards_dictionary = None
+        self.image_dictionary = {"♦": "diamonds", "♠": "spades", "♣": "clubs", "♥": "hearts", "T": "10",
+                                 "J": "jack", "Q": "queen", "K": "king", "A": "ace"}
         self.done = None
         self.agent_action = None
         self.player_action = None
@@ -148,14 +149,15 @@ class Game:
 
     def create_context(self):
         context = {
-            "player_cards": self.env.cards_print(self.env.player.hand),
+            "player_cards": self.cards_str_to_image_files(self.env.cards_print(self.env.player.hand)),
             "player_stack": self.env.player.stack_size,
             "player_position": self.env.player.position.name,
             "opponent_stack": self.env.opponent.stack_size,
             "opponent_position": self.env.opponent.position.name,
-            "opponent_cards": self.env.cards_print(self.env.opponent.hand),
+            "opponent_cards": self.cards_str_to_image_files(self.env.cards_print(self.env.opponent.hand),
+                                                            show_cards=self.show_opponent_cards),
             "opponent_action": self.agent_action,
-            "community_cards": self.env.cards_print(self.env.community_cards),
+            "community_cards": self.cards_str_to_image_files(self.env.cards_print(self.env.community_cards), 5),
             "done": self.done,
             "pot_size": self.env.pot,
             "player_turn": self.is_player_turn(),
@@ -164,11 +166,35 @@ class Game:
         }
         return context
 
+    def get_card_images(self):
+        pass
+
     def get_absolute_winner(self):
         if self.env.player.stack_size > self.env.opponent.stack_size:
             return "Player"
         else:
             return "opponent"
+
+    def cards_str_to_image_files(self, cards_str, number_of_cards=2, show_cards=True):
+        cards = cards_str.split(',')
+        cards = [card.replace('[', '').replace(']', '') for card in cards]
+        if len(cards) < 2:
+            cards = []
+        file_names = []
+        for card in cards:
+            color = card[-1]
+            val = card[:-1]
+            color_str = self.image_dictionary[color]
+            value_str = self.image_dictionary.get(val)
+            if value_str is None:
+                value_str = val
+            if show_cards:
+                file_names.append("Images/" + value_str + "_of_" + color_str + ".png")
+            else:
+                file_names.append("Images/cover.png")
+        for i in range(number_of_cards - len(cards)):
+            file_names.append("Images/cover.png")
+        return file_names
 
 
 def play_game():

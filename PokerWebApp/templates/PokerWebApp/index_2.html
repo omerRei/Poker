@@ -2,7 +2,6 @@
 <html>
 <head>
 	<title>Poker Game</title>
-    {% load static %}
 	{% load bootstrap5 %}
 	{% bootstrap_css %}
 	{% bootstrap_javascript %}
@@ -28,7 +27,7 @@
             <div class="col-2"></div>
             {% for link in opponent_cards %}
                 {% load static %}
-                <div class="col-2" style="margin-right:0px"> <img style="width:50%; height:100%;" class="img-thumbnail" src="{% static link %}" class="rounded-end"></div>
+                <div class="col-2" > <img style="width:50%; height:100%;" class="img-thumbnail" src="{% static link %}" class="rounded-end"></div>
               {% endfor %}
             <div class="col-2"></div>
           </div>
@@ -86,7 +85,7 @@
             <div class="col"></div>
               {% for link in player_cards %}
                 {% load static %}
-                <div class="col"> <img style="width:50%; height:100%;" class="img-thumbnail" src="{% static link %}" class="rounded-end"></div>"
+                <div class="col"> <img style="width:50%; height:100%;" class="img-thumbnail" src="{% static link %}" class="rounded-end"></div>
               {% endfor %}
             <div class="col"></div>
           </div>

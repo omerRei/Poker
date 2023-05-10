@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "PokerModel",
     "PokerWebApp",
+    'bootstrap5',
 ]
 
 MIDDLEWARE = [

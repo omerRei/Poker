@@ -5,16 +5,20 @@ from PokerModel.PokerModel.Game import Game
 
 game = Game()
 
+def test_html(request):
+    if request.method == 'GET':
+        return render(request, 'PokerWebApp/index.html', context={})
+
 def index(request):
     if request.method == 'GET':
         game.reset()
-        return render(request, 'PokerWebApp/index.html', context=game.create_context())
+        return render(request, 'PokerWebApp/index_2.html', context=game.create_context())
     else:
         player_action(request)
         if game.done:
             return render(request, 'PokerWebApp/winnerPage.html', {"winner": game.get_absolute_winner()})
         else:
-            return render(request, 'PokerWebApp/index.html', context=game.create_context())
+            return render(request, 'PokerWebApp/index_2.html', context=game.create_context())
 
 
 def player_action(request):

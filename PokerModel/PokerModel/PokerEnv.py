@@ -263,7 +263,7 @@ class PokerEnv():
         return valid_actions
 
     def full_print(self):
-        s = self.status_print() + "\n" + \
+        s = \
             "community cards:" + self.cards_print(self.community_cards) + "\n" + \
             "player cards:" + self.cards_print(self.player.get_hand()) + "\n" + \
             "opponent cards:" + self.cards_print(self.opponent.get_hand()) + "\n"
@@ -283,8 +283,6 @@ class PokerEnv():
             for card in cards[:-1]:
                 s += Card.int_to_pretty_str(card) + ","
             s += Card.int_to_pretty_str(cards[-1])
-        else:
-            s += "pre flop"
         return s
 
     def calculate_reward(self):

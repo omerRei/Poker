@@ -22,7 +22,8 @@ from django.urls import path
 
 urlpatterns = [
   path('admin/', admin.site.urls),
-  path('poker/', index)
+  path('poker/', index),
+  path('test/', test_html)
 ]
 
 
