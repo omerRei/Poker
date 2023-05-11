@@ -151,9 +151,11 @@ class Game:
         context = {
             "player_cards": self.cards_str_to_image_files(self.env.cards_print(self.env.player.hand)),
             "player_stack": self.env.player.stack_size,
+            "player_bet": self.env.player.total_bet,
             "player_position": self.env.player.position.name,
             "opponent_stack": self.env.opponent.stack_size,
             "opponent_position": self.env.opponent.position.name,
+            "opponent_bet": self.env.opponent.total_bet,
             "opponent_cards": self.cards_str_to_image_files(self.env.cards_print(self.env.opponent.hand),
                                                             show_cards=self.show_opponent_cards),
             "opponent_action": self.agent_action,
