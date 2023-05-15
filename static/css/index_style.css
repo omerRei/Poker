@@ -1,0 +1,17 @@
+html {
+     min-height: 100%;
+}
+
+body {
+    min-height: 100vh;
+    padding: 0;
+}
+
+.page {
+    min-height: 100vh;
+}
+
+.board {
+    margin: 0px 0px;
+    padding: 0px 0px;
+}

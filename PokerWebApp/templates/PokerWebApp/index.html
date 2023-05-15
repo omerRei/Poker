@@ -1,138 +1,194 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<title>Poker Game</title>
-    {% load static %}
-	{% load bootstrap5 %}
+    <meta charset="UTF-8">
+    <title>Omer's site</title>
+    {% load bootstrap5 %}
 	{% bootstrap_css %}
 	{% bootstrap_javascript %}
+    {% load static %}
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
 </head>
 <body>
-  <div class="container">
-    <div class="row">
-      <div class="col">
-      </div>
-      <div class="col-8">
-        <div class="card shadow-sm">
-          <div class="row">
-            <div class="col-2">
-                    <form action="" method="post">
-						{% csrf_token %}
-						{% if show_opponent_cards %}
-							<button class="btn btn-sm btn-outline-secondary" type="submit" name="action" value="show_cards">Hide</button>
-						{% else %}
-							<button class="btn btn-sm btn-outline-secondary" type="submit" name="action" value="show_cards">Show</button>
-						{% endif %}
-					</form>
-            </div>
-            <div class="col-2"></div>
-            {% for link in opponent_cards %}
-                {% load static %}
-                <div class="col-2" style="margin-right:0px"> <img style="width:50%; height:100%;" class="img-thumbnail" src="{% static link %}" class="rounded-end"></div>
-              {% endfor %}
-            <div class="col-2"></div>
-          </div>
-            <div class="card-body">
-              <div class="d-flex justify-content-between align-items-center">
-                <form action="" method="post">
-                  {% csrf_token %}
-                  {% if player_turn %}
-                      <button style="margin-top:50px; margin-right:20px " disabled type="submit" name="action" value="nip">Agent Action</button>
-                  {% else %}
-                      <button style="margin-top:50px; margin-right:20px " type="submit" name="action" value="nip">Agent Action</button>
-                  {% endif %}
-		        </form>
-                <div class="row">
-                  <div class="col">
-                    <small class="text-muted">stack size: {{opponent_stack}}</small>
-                  </div>
-                  <div class="col">
-                    <small class="text-muted">position: {{ opponent_position }}</small>
-                  </div>
-                  <div class="col">
-                    <small class="text-muted">current bet: 10</small>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-      </div>
-      <div class="col">
-        {{winner}}
-      </div>
-    </div>
-    <div class="row" >
-      <div class="col">
-      </div>
-      <div class="col-6">
-        <div class="row">
-          {% for link in community_cards %}
-                  {% load static %}
-                  <div class="col" style=" margin-left:1px;margin-right:1px;padding-left:1px;padding-right:1px;">
-                    <img style="max-width:100%; max-height:80%; margin-top:10px;" src="{% static link %}" class="card-img-top">
-                  </div>
-          {% endfor %}
+    <div class="container page" style="background-image: linear-gradient(to right, #4f994d, #b59521, #4f994d);">
+        <nav class="navbar navbar-light bg-light"style="margin:0%;background-image: linear-gradient(to right, #4f994d, #b59521, #4f994d);" >
+        <div class="container-fluid">
+              <div ><h6>omerreichstein@gmail.com</h6></div>
+              <div ><h6>Deep Reinforcement Learning Poker Agent by Omer Reichstein</h6></div>
+              <div ><h6>tel:0506595519</h6></div>
         </div>
-      </div>
-      <div class="col">
-      </div>
-    </div>
-    <div class="row">
-      <div class="col">
-      </div>
-      <div class="col-8">
-        <div class="card shadow-sm">
-          <div class="row">
-            <div class="col"></div>
-              {% for link in player_cards %}
-                {% load static %}
-                <div class="col"> <img style="width:50%; height:100%;" class="img-thumbnail" src="{% static link %}" class="rounded-end"></div>"
-              {% endfor %}
-            <div class="col"></div>
-          </div>
-            <div class="card-body">
-              <div class="d-flex justify-content-between align-items-center">
-                <form action="" method="post">
-                  {% csrf_token %}
-                  {% if player_turn %}
-                  <div class="btn-group">
-                    <button type="submit" name="action" class="btn btn-sm btn-outline-secondary" value="Fold">Fold</button>
-                    <button type="submit" name="action" class="btn btn-sm btn-outline-secondary" value="Check">Check</button>
-                    <button type="submit" name="action" class="btn btn-sm btn-outline-secondary" value="Call">Call</button>
-                    <button type="submit" name="action" class="btn btn-sm btn-outline-secondary" value="Min_Raise">Small Raise</button>
-                    <button type="submit" name="action" class="btn btn-sm btn-outline-secondary" value="Big_Raise">Big Raise</button>
-                  </div>
-                  {% else %}
-                  <div class="btn-group">
-                    <button disabled type="submit" name="action" class="btn btn-sm btn-outline-secondary" value="Fold">Fold</button>
-                    <button disabled type="submit" name="action" class="btn btn-sm btn-outline-secondary" value="Check">Check</button>
-                    <button disabled type="submit" name="action" class="btn btn-sm btn-outline-secondary" value="Call">Call</button>
-                    <button disabled type="submit" name="action" class="btn btn-sm btn-outline-secondary" value="Min_Raise">Small Raise</button>
-                    <button disabled type="submit" name="action" class="btn btn-sm btn-outline-secondary" value="Big_Raise">Big Raise</button>
-                  </div>
-                  {% endif %}
-                </form>
+        </nav>
+        <div class="row" style="min-height: 100vh;">
+            <div class="col skill">
+                <h2>Projects</h2>
                 <div class="row">
-                  <div class="col">
-                    <small class="text-muted">stack size: {{player_stack}}</small>
-                  </div>
-                  <div class="col">
-                    <small class="text-muted">position: {{player_position}}</small>
-                  </div>
-                  <div class="col">
-                    <small class="text-muted">current bet: 10</small>
-                  </div>
+                    <div class="col">
+                        <div class="card h-100" style="border-color:black">
+                          <img src="{%static  'Images/ProjectsImg.jpg' %}" class="card-img-top" alt="...">
+                          <div class="card-body skill">
+                            <button class="btn btn-dark card-title" onclick=" window.open('https://github.com/omerRei','_blank')"> GitHub</button>
+                            <p class="card-text" >Repositories and other projects.</p>
+                          </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="card h-100" style="border-color:black">
+                          <img src="{%static  'Images/nnImg.jpg' %}" class="card-img-top" alt="...">
+                          <div class="card-body skill">
+                            <button class="btn btn-dark" onclick=" window.open('https://drive.google.com/file/d/1SQFNV9FSmORDO7DJWRt8JUcS-0e1hwK2/view?usp=share_link','_blank')">Thesis</button>
+                            <p class="card-text">Classifying Repeated Patterns for Non-Intrusive Load Monitoring. Funded research.</p>
+                          </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-      </div>
-      <div class="col">
-      </div>
-    </div>
-  </div>
+            <div  class="col-8">
+                <div class="container board" style="height: 30%;">
+                    <div class="jumbotron jumbotron-fluid" style="height:100%;">
+                      <div class="container" style="height:100%;">
+                          <div class="row" style="height:100%; padding-top: 20px;">
+                              <div class="col-4">
+                                  <ul class="list-group">
+                                      <li class="list-group-item info">stack size: {{opponent_stack}}</li>
+                                      <li class="list-group-item info">position: {{ opponent_position }}</li>
+                                      <li class="list-group-item info">current bet: {{opponent_bet}}</li>
+                                          <form action="" method="post">
+                                                {% csrf_token %}
+                                                {% if show_opponent_cards %}
+                                                    <button class="btn btn-sm btn-outline-warning" type="submit" name="action" value="show_cards">Hide Opponent Cards</button>
+                                                {% else %}
+                                                    <button class="btn btn-sm btn-outline-warning" type="submit" name="action" value="show_cards">Show Opponent Cards</button>
+                                                {% endif %}
+                                          </form>
+                                  </ul>
+                              </div>
+                              <div class="col-4 yellowB" style="display: flex; justify-content: center; margin-bottom: 100px; padding-top:5px;">
+                                  {% for link in opponent_cards %}
+                                    {% load static %}
+                                    <img style="width:40%;height:80%; padding-top:5px; margin-left:1px;margin-right:1px;padding-left:1px;padding-right:1px;" class="rounded float-left" src="{% static link %}">
+                                  {% endfor %}
+                              </div>
+                              <div class="col-4" style="color:white">
+                                  <p>{{winner}}</p>
+                                  {% if messages %}
+                                    <ul class="messages">
+                                        {% for message in messages %}
+                                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                    {% endif %}
+                              </div>
+                          </div>
+                      </div>
+                    </div>
+                </div>
+                <div class="container board" style="height: 30%;">
+                    <div class="jumbotron jumbotron-fluid" style="height:100%;">
+                      <div class="container" style="height:100%;">
+                        <div class="row" style="height:100%;">
+                            <div class="col-3">
+                                <h2 style="color:#b59521;">pot size: {{pot_size}}</h2>
+                            </div>
+                            <div class="col-9 yellowB " style="padding-top:20px; padding-right:20px; padding-left:20px;">
+                                <div class="row">
+                                  {% for link in community_cards %}
+                                          {% load static %}
+                                          <div class="col" style=" margin-left:1px;margin-right:1px;padding-left:1px;padding-right:1px;">
+                                            <img style="max-width:100%; max-height:80%; margin-top:10px;" src="{% static link %}" class="card-img-top">
+                                          </div>
+                                  {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+                <div class="container board" style="height: 30%;">
+                                        <div class="jumbotron jumbotron-fluid" style="height:100%;">
+                      <div class="container" style="height:100%;">
+                          <div class="row" style="height:80%; padding-top:30px;">
+                              <div class="col-4">
+                                  <ul class="list-group">
+                                      <li class="list-group-item info">stack size: {{player_stack}}</li>
+                                      <li class="list-group-item info">position: {{ player_position }}</li>
+                                      <li class="list-group-item info">current bet: {{player_bet}}</li>
+                                  </ul>
+                              </div>
+                              <div class="col-8">
+                                  <div class="row" style="height:90%;">
+                                  <div class="col-6 yellowB" style="padding-top:15px">
+                                  {% for link in player_cards %}
+                                    {% load static %}
+                                    <img style="width:40%;height:80%;padding-top:5px; margin-left:1px;margin-right:1px;padding-left:1px;padding-right:1px;" class="rounded float-left" src="{% static link %}">
+                                  {% endfor %}
+                                  </div>
+                                  <div class="col-6">
+                                      <form action="" method="post" style="padding:20px;">
+                                          {% csrf_token %}
+                                          {% if player_turn %}
+                                          <div class="btn-group">
+                                            <button type="submit" name="action" class="btn btn-sm btn-outline-warning" value="Fold">Fold</button>
+                                            <button type="submit" name="action" class="btn btn-sm btn-outline-warning" value="Check">Check</button>
+                                            <button type="submit" name="action" class="btn btn-sm btn-outline-warning" value="Call">Call</button>
+                                            <button type="submit" name="action" class="btn btn-sm btn-outline-warning" value="Min_Raise">Small Raise</button>
+                                            <button type="submit" name="action" class="btn btn-sm btn-outline-warning" value="Big_Raise">Big Raise</button>
+                                          </div>
+                                          {% else %}
+                                          <div class="btn-group">
+                                            <button disabled type="submit" name="action" class="btn btn-sm btn-outline-warning" value="Fold">Fold</button>
+                                            <button disabled type="submit" name="action" class="btn btn-sm btn-outline-warning" value="Check">Check</button>
+                                            <button disabled type="submit" name="action" class="btn btn-sm btn-outline-warning" value="Call">Call</button>
+                                            <button disabled type="submit" name="action" class="btn btn-sm btn-outline-warning" value="Min_Raise">Small Raise</button>
+                                            <button disabled type="submit" name="action" class="btn btn-sm btn-outline-warning" value="Big_Raise">Big Raise</button>
+                                          </div>
+                                          {% endif %}
+                                  </form>
+                                  <form action="" method="post">
+                                      {% csrf_token %}
+                                      {% if player_turn %}
+                                          <button class="btn btn-sm btn-outline-warning" disabled type="submit" name="action" value="nip">Agent Action</button>
+                                      {% else %}
+                                          <button class="btn btn-sm btn-outline-warning"type="submit" name="action" value="nip">Agent Action</button>
+                                      {% endif %}
+                                  </form>
 
-	{% block content %}
-  	{% endblock %}
+                                  </div>
+                              </div>
+                              </div>
+                          </div>
+                          <div class="row" style="height:20%;">
+                          </div>
+                      </div>
+                    </div>
+                </div>
+                <div class="container board" style="height: 10%; color: #68786c">
+                    <p>This agent actions are taking by a heuristic based decisions, made available by training a deep Q network with self play mechanism.</p>
+                </div>
+            </div>
+            <div class="col skill">
+                <h2 class="skill">Resume:</h2>
+                     <ul class="list-group">
+                      <li class="list-group-item skill"><button class="btn btn-dark card-title" onclick=" window.open('https://drive.google.com/file/d/1u-8gpUFKSx1_dIZScJEEuPfRTQRX4Riz/view?usp=share_link','_blank')"> CV</button></li>
+                     </ul>
+                <h2 class="skill">My Skills:</h2>
+                <ul class="list-group">
+                  <li class="list-group-item skill">Python</li>
+                  <li class="list-group-item skill">Java</li>
+                  <li class="list-group-item skill">C++</li>
+                  <li class="list-group-item skill">Data Science</li>
+                  <li class="list-group-item skill">Pytorch</li>
+                  <li class="list-group-item skill">TensorFlow</li>
+                  <li class="list-group-item skill">MSSQL</li>
+                  <li class="list-group-item skill">MONGO DB</li>
+                  <li class="list-group-item skill">Big Data</li>
+                  <li class="list-group-item skill">AWS</li>
+                  <li class="list-group-item skill">Spark</li>
+                  <li class="list-group-item skill">Statistics</li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

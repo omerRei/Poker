@@ -26,6 +26,9 @@ def get_observation(pokerEnv,cards_dictionary, cur_player, other_player):
     # Convert the community cards into one-hot encoded representation
     community_cards_observation = get_cards_representation(cards_dictionary, pokerEnv.community_cards, 5)
 
+    # Normalize the amount to call
+    call_observation = np.array((other_player.total_bet - cur_player.total_bet) / INITIAL_STACK_SIZE)
+
     # Normalize the pot size
     pot_size_observation = np.array([pokerEnv.pot / INITIAL_STACK_SIZE * 2])
 
@@ -40,6 +43,7 @@ def get_observation(pokerEnv,cards_dictionary, cur_player, other_player):
         community_cards_observation,
         pot_size_observation,
         stack_sizes_observation,
+        call_observation,
     )
     return convert_observation_to_input(observation)
 
