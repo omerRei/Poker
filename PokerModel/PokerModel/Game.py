@@ -1,4 +1,5 @@
 from .PokerEnv import *
+import tensorflow as tf
 from tensorflow import keras
 import numpy as np
 
@@ -8,12 +9,14 @@ def get_other_player_action(pokerEnv, model, cards_dictionary, cur_player, other
     # return np.random.choice(valid_actions)
     observation = get_observation(pokerEnv, cards_dictionary,  cur_player, other_player)
     other_player_observation = np.array([observation.reshape(1, -1)])
-    q_values = model.predict(other_player_observation, verbose=0)
-    mask = np.ones(model.output_shape[1])
-    mask[valid_actions] = 0
-    masked_q_values = q_values - (mask * 1e9)
+    q_values = model(tf.expand_dims(tf.expand_dims(tf.convert_to_tensor(observation), 0), 0))
+    q_values = q_values[0].numpy()
+    q_values = q_values[valid_actions]
     # Choose action with highest Q-value among valid actions
-    action = np.argmax(masked_q_values)
+    e_x = np.exp(q_values - np.max(q_values))  # need fix
+    softmax_dist = e_x / e_x.sum(axis=0)
+    softmax_dist = np.nan_to_num(softmax_dist)
+    action = np.random.choice(valid_actions, 1, p=softmax_dist)[0]
     return action
 
 def get_observation(pokerEnv,cards_dictionary, cur_player, other_player):

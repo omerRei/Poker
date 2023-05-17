@@ -285,16 +285,13 @@ class PokerEnv():
             return True
 
     def get_player_valid_actions(self, other_player):
-        valid_actions = [0, 3, 4]
         if other_player.already_played:
-            if other_player.position == Position.CHECK:
-                valid_actions = [1, 3, 4]
-            if other_player.position == Position.CALL:
-                valid_actions = [1, 3, 4]
-            if other_player.position == Position.RAISE:
-                valid_actions = [0, 2, 3, 4]
+            if other_player.position == Position.CHECK or other_player.position == Position.CALL:
+                valid_actions = [1, 2, 3, 4, 5]
+            else:
+                valid_actions = [0, 1, 2, 3, 4, 5]
         else:
-            valid_actions = [0, 2, 3, 4]
+            valid_actions = [1, 2, 3, 4, 5]
         return valid_actions
 
     def full_print(self):
