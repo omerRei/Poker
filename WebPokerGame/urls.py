@@ -21,9 +21,9 @@ from django.contrib import admin
 from django.urls import path
 
 urlpatterns = [
-  path('admin/', admin.site.urls),
-  path('poker/', index),
-  path('test/', test_html)
+  # path('admin/', admin.site.urls),
+  path('', index),
+  # path('test/', test_html)
 ]
 
 

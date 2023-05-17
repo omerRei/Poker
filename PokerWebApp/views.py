@@ -18,8 +18,8 @@ def index(request):
     else:
         player_action(request)
         if game.done:
-            messages.info(request, 'Game is Over!')
-            return render(request, 'PokerWebApp/winnerPage.html', {"winner": game.get_absolute_winner()})
+            messages.info(request, 'Game is Over! The winner is:' + game.get_absolute_winner())
+            return render(request, 'PokerWebApp/index.html', {"winner": game.get_absolute_winner()})
         else:
             messages.info(request, '')
             return render(request, 'PokerWebApp/index.html', context=game.create_context())

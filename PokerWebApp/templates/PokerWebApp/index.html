@@ -45,11 +45,11 @@
                 </div>
             </div>
             <div  class="col-8">
-                <div class="container board" style="height: 30%;">
+                <div class="container board" style="height: 20%;">
                     <div class="jumbotron jumbotron-fluid" style="height:100%;">
                       <div class="container" style="height:100%;">
                           <div class="row" style="height:100%; padding-top: 20px;">
-                              <div class="col-4">
+                              <div class="col-3">
                                   <ul class="list-group">
                                       <li class="list-group-item info">stack size: {{opponent_stack}}</li>
                                       <li class="list-group-item info">position: {{ opponent_position }}</li>
@@ -64,10 +64,10 @@
                                           </form>
                                   </ul>
                               </div>
-                              <div class="col-4 yellowB" style="display: flex; justify-content: center; margin-bottom: 100px; padding-top:5px;">
+                              <div class="col-5 yellowB" style="display: flex; justify-content: center; height:100%">
                                   {% for link in opponent_cards %}
                                     {% load static %}
-                                    <img style="width:40%;height:80%; padding-top:5px; margin-left:1px;margin-right:1px;padding-left:1px;padding-right:1px;" class="rounded float-left" src="{% static link %}">
+                                    <img style="width:40%;height:80%; padding-top:20px; margin-left:1px;margin-right:1px;padding-left:1px;padding-right:1px;" class="rounded float-left" src="{% static link %}">
                                   {% endfor %}
                               </div>
                               <div class="col-4" style="color:white">
@@ -84,7 +84,7 @@
                       </div>
                     </div>
                 </div>
-                <div class="container board" style="height: 30%;">
+                <div class="container board" style="height: 25%; padding-top:10px">
                     <div class="jumbotron jumbotron-fluid" style="height:100%;">
                       <div class="container" style="height:100%;">
                         <div class="row" style="height:100%;">
@@ -105,45 +105,45 @@
                       </div>
                     </div>
                 </div>
-                <div class="container board" style="height: 30%;">
+                <div class="container board" style="height: 20%;">
                                         <div class="jumbotron jumbotron-fluid" style="height:100%;">
                       <div class="container" style="height:100%;">
-                          <div class="row" style="height:80%; padding-top:30px;">
-                              <div class="col-4">
+                          <div class="row" style="height:100%; padding-top:30px;">
+                              <div class="col-3">
                                   <ul class="list-group">
                                       <li class="list-group-item info">stack size: {{player_stack}}</li>
                                       <li class="list-group-item info">position: {{ player_position }}</li>
                                       <li class="list-group-item info">current bet: {{player_bet}}</li>
                                   </ul>
                               </div>
-                              <div class="col-8">
+                              <div class="col-9">
                                   <div class="row" style="height:90%;">
-                                  <div class="col-6 yellowB" style="padding-top:15px">
+                                  <div class="col-6 yellowB" style="padding-top:2%; padding-left:5%">
                                   {% for link in player_cards %}
                                     {% load static %}
                                     <img style="width:40%;height:80%;padding-top:5px; margin-left:1px;margin-right:1px;padding-left:1px;padding-right:1px;" class="rounded float-left" src="{% static link %}">
                                   {% endfor %}
                                   </div>
                                   <div class="col-6">
-                                      <form action="" method="post" style="padding:20px;">
+                                      <form action="" method="post" style="padding:0px;">
                                           {% csrf_token %}
                                           {% if player_turn %}
                                           <div class="btn-group">
                                             <button type="submit" name="action" class="btn btn-sm btn-outline-warning" value="FOLD">Fold</button>
-                                            <button type="submit" name="action" class="btn btn-sm btn-outline-warning" value="CHECK_CALL">Check/Call</button>
-                                            <button type="submit" name="action" class="btn btn-sm btn-outline-warning" value="RAISE_BIG_BLIND">Min Raise</button>
-                                            <button type="submit" name="action" class="btn btn-sm btn-outline-warning" value="RAISE_HALF_POT">Raise 1/2 Pot</button>
-                                            <button type="submit" name="action" class="btn btn-sm btn-outline-warning" value="RAISE_POT">Raise Pot Size</button>
-                                            <button type="submit" name="action" class="btn btn-sm btn-outline-warning" value="RAISE_TWO_POT">Raise 2x Pot</button>
+                                            <button type="submit" name="action" class="btn btn-sm btn-outline-warning" value="CHECK_CALL">Check<br>Call</button>
+                                            <button type="submit" name="action" class="btn btn-sm btn-outline-warning" value="RAISE_BIG_BLIND">Min<br>Raise</button>
+                                            <button type="submit" name="action" class="btn btn-sm btn-outline-warning" value="RAISE_HALF_POT">Raise<br>1/2 Pot</button>
+                                            <button type="submit" name="action" class="btn btn-sm btn-outline-warning" value="RAISE_POT">Raise<br>Pot Size</button>
+                                            <button type="submit" name="action" class="btn btn-sm btn-outline-warning" value="RAISE_TWO_POT">Raise<br>2x Pot</button>
                                           </div>
                                           {% else %}
                                           <div class="btn-group">
                                             <button disabled type="submit" name="action" class="btn btn-sm btn-outline-warning" value="FOLD">Fold</button>
-                                            <button disabled type="submit" name="action" class="btn btn-sm btn-outline-warning" value="CHECK_CALL">Check/Call</button>
-                                            <button disabled type="submit" name="action" class="btn btn-sm btn-outline-warning" value="RAISE_BIG_BLIND">Min Raise</button>
-                                            <button disabled type="submit" name="action" class="btn btn-sm btn-outline-warning" value="RAISE_HALF_POT">Raise 1/2 Pot</button>
-                                            <button disabled type="submit" name="action" class="btn btn-sm btn-outline-warning" value="RAISE_POT">Raise Pot Size</button>
-                                            <button disabled type="submit" name="action" class="btn btn-sm btn-outline-warning" value="RAISE_TWO_POT">Raise 2x Pot</button>
+                                            <button disabled type="submit" name="action" class="btn btn-sm btn-outline-warning" value="CHECK_CALL">Check<br>Call</button>
+                                            <button disabled type="submit" name="action" class="btn btn-sm btn-outline-warning" value="RAISE_BIG_BLIND">Min<br>Raise</button>
+                                            <button disabled type="submit" name="action" class="btn btn-sm btn-outline-warning" value="RAISE_HALF_POT">Raise<br>1/2 Pot</button>
+                                            <button disabled type="submit" name="action" class="btn btn-sm btn-outline-warning" value="RAISE_POT">Raise<br>Pot Size</button>
+                                            <button disabled type="submit" name="action" class="btn btn-sm btn-outline-warning" value="RAISE_TWO_POT">Raise<br>2x Pot</button>
                                           </div>
                                           {% endif %}
                                   </form>
@@ -160,13 +160,12 @@
                               </div>
                               </div>
                           </div>
-                          <div class="row" style="height:20%;">
-                          </div>
+
                       </div>
                     </div>
                 </div>
-                <div class="container board" style="height: 10%; color: #68786c">
-                    <p>This agent actions are taking by a heuristic based decisions, made available by training a deep Q network with self play mechanism.</p>
+                <div class="container board" style="height: 32%; color: #68786c; padding-top:30px">
+                    <p> Deep reinforcement learning poker agent. By leveraging the power of advanced algorithms and the concept of self-play, the agent has successfully mastered the intricate rules of the game. Through many iterations of training and exploration, it has acquired an exceptional understanding of the game dynamics and a keen ability to adapt to varying scenarios. To accomplish this, the deep reinforcement learning agent learns through trial and error. It interacts with the environment, taking actions based on its current policy, and receives feedback in the form of rewards. The agent's objective is to update its policy so that it gradually improves its decision-making abilities. The agent's decision-making process is guided by an epsilon greedy approach, which allows it to strike a delicate balance between exploration and exploitation. Equipped with an extensive set of carefully engineered features (cards, community cards, position, bets etc...), the agent can effectively assess the state of the game and make strategic choices accordingly. Overall, this deep reinforcement learning agent is a testament to the immense potential of artificial intelligence in mastering complex strategic tasks like playing poker.</p>
                 </div>
             </div>
             <div class="col skill">
