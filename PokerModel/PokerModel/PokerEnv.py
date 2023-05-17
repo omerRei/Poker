@@ -2,6 +2,7 @@ from .Player import Player
 from treys import Deck, Evaluator, Card
 from .Enums import Position, Action
 import numpy as np
+import math
 
 INITIAL_STACK_SIZE = 100
 SMALL_BLIND = 1
@@ -136,14 +137,16 @@ class PokerEnv():
         final_action = None
         if action == Action.FOLD.value:
             final_action = self.perform_fold(cur_player)
-        if action == Action.CHECK.value:
-            final_action = self.perform_check(cur_player, other_player)
-        if action == Action.CALL.value:
+        if action == Action.CHECK_CALL.value:
             final_action = self.perform_call(cur_player, other_player)
-        if action == Action.MIN_RAISE.value:
-            final_action = self.perform_min_raise(cur_player, other_player)
-        if action == Action.BIG_RAISE.value:
-            final_action = self.perform_big_raise(cur_player, other_player)
+        if action == Action.RAISE_BIG_BLIND.value:
+            final_action = self.perform_raise_big_blind(cur_player, other_player)
+        if action == Action.RAISE_HALF_POT.value:
+            final_action = self.perform_raise_half_pot(cur_player, other_player)
+        if action == Action.RAISE_POT.value:
+            final_action = self.perform_raise_pot(cur_player, other_player)
+        if action == Action.RAISE_TWO_POT.value:
+            final_action = self.perform_raise_two_pot(cur_player, other_player)
         return final_action
 
     def perform_fold(self, cur_player):
@@ -154,7 +157,7 @@ class PokerEnv():
         if cur_player.total_bet != other_player.total_bet:
             return self.perform_call(cur_player, other_player)
         cur_player.position = Position.CHECK
-        return Action.CHECK
+        return Action.CHECK_CALL
 
     def perform_call(self, cur_player, other_player):
         amount = other_player.total_bet - cur_player.total_bet
@@ -166,15 +169,15 @@ class PokerEnv():
             pot_change = other_player.total_bet - cur_player.total_bet
             self.pot -= pot_change
             other_player.stack_size += pot_change
-        return Action.CALL
+            other_player.total_bet -= pot_change
+        return Action.CHECK_CALL
 
-    def perform_min_raise(self, cur_player, other_player):
+    def perform_raise_big_blind(self, cur_player, other_player):
         amount = other_player.total_bet - cur_player.total_bet
         if amount >= cur_player.stack_size:
             return self.perform_call(cur_player, other_player)
-        bet_amount = 0
         if amount == 0:
-            bet_amount = SMALL_BLIND
+            bet_amount = BIG_BLIND
         else:
             bet_amount = amount * 2
         if other_player.stack_size < bet_amount:
@@ -184,26 +187,58 @@ class PokerEnv():
         else:
             self.pot += cur_player.place_bet(int(bet_amount))
             cur_player.position = Position.RAISE
-            return Action.MIN_RAISE
+            return Action.RAISE_BIG_BLIND
 
-    def perform_big_raise(self, cur_player, other_player):
+    def perform_raise_half_pot(self, cur_player, other_player):
         amount = other_player.total_bet - cur_player.total_bet
         if amount >= cur_player.stack_size:
             return self.perform_call(cur_player, other_player)
-        bet_amount = 0
         if amount == 0:
-            bet_amount = BIG_BLIND * 3
+            bet_amount = math.ceil(self.pot / 2.0)
         else:
-            bet_amount = amount * 3
+            bet_amount = amount + self.pot // 2
         if other_player.stack_size < bet_amount:
             bet_amount = other_player.stack_size + amount
         if cur_player.stack_size < bet_amount:
-            return self.perform_min_raise(cur_player, other_player)
+            return self.perform_call(cur_player, other_player)
         else:
             self.pot += cur_player.place_bet(int(bet_amount))
             cur_player.position = Position.RAISE
-            return Action.BIG_RAISE
+            return Action.RAISE_HALF_POT
 
+    def perform_raise_pot(self, cur_player, other_player):
+        amount = other_player.total_bet - cur_player.total_bet
+        if amount >= cur_player.stack_size:
+            return self.perform_call(cur_player, other_player)
+        if amount == 0:
+            bet_amount = self.pot
+        else:
+            bet_amount = amount + self.pot
+        if other_player.stack_size < bet_amount:
+            bet_amount = other_player.stack_size + amount
+        if cur_player.stack_size < bet_amount:
+            return self.perform_call(cur_player, other_player)
+        else:
+            self.pot += cur_player.place_bet(int(bet_amount))
+            cur_player.position = Position.RAISE
+            return Action.RAISE_POT
+
+    def perform_raise_two_pot(self, cur_player, other_player):
+        amount = other_player.total_bet - cur_player.total_bet
+        if amount >= cur_player.stack_size:
+            return self.perform_call(cur_player, other_player)
+        if amount == 0:
+            bet_amount = self.pot * 2
+        else:
+            bet_amount = amount + self.pot * 2
+        if other_player.stack_size < bet_amount:
+            bet_amount = other_player.stack_size + amount
+        if cur_player.stack_size < bet_amount:
+            return self.perform_call(cur_player, other_player)
+        else:
+            self.pot += cur_player.place_bet(int(bet_amount))
+            cur_player.position = Position.RAISE
+            return Action.RAISE_TWO_POT
 
     def execute_player_action(self, cur_player, other_player, action):
         final_action = ""

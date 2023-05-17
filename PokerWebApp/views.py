@@ -31,14 +31,15 @@ def player_action(request):
             game.flip_show_cards()
         elif 'Fold' == request.POST['action']:
             game.step(0)
-        elif 'Check' == request.POST['action']:
+        elif 'CHECK_CALL' == request.POST['action']:
             game.step(1)
-        elif 'Call' == request.POST['action']:
+        elif 'RAISE_BIG_BLIND' == request.POST['action']:
             game.step(2)
-        elif 'Min_Raise' == request.POST['action']:
+        elif 'RAISE_HALF_POT' in request.POST['action']:
             game.step(3)
-        elif 'Big_Raise' in request.POST['action']:
+        elif 'RAISE_POT' in request.POST['action']:
             game.step(4)
+        elif 'RAISE_TWO_POT' in request.POST['action']:
+            game.step(5)
         else:
             game.step(0)
-

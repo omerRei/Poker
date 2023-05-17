@@ -129,19 +129,21 @@
                                           {% csrf_token %}
                                           {% if player_turn %}
                                           <div class="btn-group">
-                                            <button type="submit" name="action" class="btn btn-sm btn-outline-warning" value="Fold">Fold</button>
-                                            <button type="submit" name="action" class="btn btn-sm btn-outline-warning" value="Check">Check</button>
-                                            <button type="submit" name="action" class="btn btn-sm btn-outline-warning" value="Call">Call</button>
-                                            <button type="submit" name="action" class="btn btn-sm btn-outline-warning" value="Min_Raise">Small Raise</button>
-                                            <button type="submit" name="action" class="btn btn-sm btn-outline-warning" value="Big_Raise">Big Raise</button>
+                                            <button type="submit" name="action" class="btn btn-sm btn-outline-warning" value="FOLD">Fold</button>
+                                            <button type="submit" name="action" class="btn btn-sm btn-outline-warning" value="CHECK_CALL">Check/Call</button>
+                                            <button type="submit" name="action" class="btn btn-sm btn-outline-warning" value="RAISE_BIG_BLIND">Min Raise</button>
+                                            <button type="submit" name="action" class="btn btn-sm btn-outline-warning" value="RAISE_HALF_POT">Raise 1/2 Pot</button>
+                                            <button type="submit" name="action" class="btn btn-sm btn-outline-warning" value="RAISE_POT">Raise Pot Size</button>
+                                            <button type="submit" name="action" class="btn btn-sm btn-outline-warning" value="RAISE_TWO_POT">Raise 2x Pot</button>
                                           </div>
                                           {% else %}
                                           <div class="btn-group">
-                                            <button disabled type="submit" name="action" class="btn btn-sm btn-outline-warning" value="Fold">Fold</button>
-                                            <button disabled type="submit" name="action" class="btn btn-sm btn-outline-warning" value="Check">Check</button>
-                                            <button disabled type="submit" name="action" class="btn btn-sm btn-outline-warning" value="Call">Call</button>
-                                            <button disabled type="submit" name="action" class="btn btn-sm btn-outline-warning" value="Min_Raise">Small Raise</button>
-                                            <button disabled type="submit" name="action" class="btn btn-sm btn-outline-warning" value="Big_Raise">Big Raise</button>
+                                            <button disabled type="submit" name="action" class="btn btn-sm btn-outline-warning" value="FOLD">Fold</button>
+                                            <button disabled type="submit" name="action" class="btn btn-sm btn-outline-warning" value="CHECK_CALL">Check/Call</button>
+                                            <button disabled type="submit" name="action" class="btn btn-sm btn-outline-warning" value="RAISE_BIG_BLIND">Min Raise</button>
+                                            <button disabled type="submit" name="action" class="btn btn-sm btn-outline-warning" value="RAISE_HALF_POT">Raise 1/2 Pot</button>
+                                            <button disabled type="submit" name="action" class="btn btn-sm btn-outline-warning" value="RAISE_POT">Raise Pot Size</button>
+                                            <button disabled type="submit" name="action" class="btn btn-sm btn-outline-warning" value="RAISE_TWO_POT">Raise 2x Pot</button>
                                           </div>
                                           {% endif %}
                                   </form>

@@ -11,7 +11,8 @@ class Position(Enum):
 
 class Action(Enum):
     FOLD = 0
-    CHECK = 1
-    CALL = 2
-    MIN_RAISE = 3
-    BIG_RAISE = 4
+    CHECK_CALL = 1
+    RAISE_BIG_BLIND = 2
+    RAISE_HALF_POT = 3
+    RAISE_POT = 4
+    RAISE_TWO_POT = 5
